@@ -7,6 +7,9 @@ const prevButton = document.getElementById('prev-btn');
 let screenIndex = 0;
 let questionIndex = -1;
 
+// Create the audio element once when the page loads
+const clickSound = new Audio('correct.mp3');
+
 // Initialize navigation
 nextButton.addEventListener('click', () => navigate('next'));
 prevButton.addEventListener('click', () => navigate('prev'));
@@ -14,34 +17,36 @@ prevButton.addEventListener('click', () => navigate('prev'));
 function navigate(direction) {
   if (direction === 'next') {
     if (screenIndex === 0) {
-      // Moving from title screen to first question
+      // Start the game
       titleScreen.classList.remove('active');
       gameScreen.classList.add('active');
       screenIndex = 1;
       questionIndex = 0;
+      // After starting, show the first question
+      showQuestion(questionIndex);
     } else {
-      // Moving to next question
+      // Go to next question
       questionIndex++;
+      showQuestion(questionIndex);
     }
   } else {
-    // Moving to previous question
+    // Go to previous question
     questionIndex--;
+    if (questionIndex < 0) {
+      // Return to title screen
+      questionIndex = -1;
+      gameScreen.classList.remove('active');
+      titleScreen.classList.add('active');
+      screenIndex = 0;
+      prevButton.style.display = 'none';
+      nextButton.textContent = 'Start Game';
+      return;
+    }
+    showQuestion(questionIndex);
   }
 
-  // Handle question bounds
-  if (questionIndex < 0) {
-    // If we go before first question, return to title screen
-    questionIndex = -1;
-    gameScreen.classList.remove('active');
-    titleScreen.classList.add('active');
-    screenIndex = 0;
-    prevButton.style.display = 'none';
-    nextButton.textContent = 'Start Game';
-    return;
-  }
-
+  // Handle end of game
   if (questionIndex >= questions.length) {
-    // End of game
     gameScreen.innerHTML = `<h1>Thanks for playing!</h1>`;
     nextButton.style.display = 'none';
     prevButton.style.display = 'none';
@@ -49,12 +54,9 @@ function navigate(direction) {
   }
 
   // Update button visibility
-  prevButton.style.display = questionIndex <= 0 && screenIndex === 1 ? 'none' : 'block';
-  nextButton.textContent = screenIndex === 0 ? 'Start Game' : 'Next';
-  nextButton.style.display = questionIndex >= questions.length - 1 ? 'none' : 'block';
-
-  // Show current question
-  showQuestion(questionIndex);
+  prevButton.style.display = (questionIndex <= 0 && screenIndex === 1) ? 'none' : 'block';
+  nextButton.textContent = (screenIndex === 0) ? 'Start Game' : 'Next';
+  nextButton.style.display = (questionIndex >= questions.length - 1 && screenIndex !== 0) ? 'none' : 'block';
 }
 
 function showQuestion(idx) {
@@ -127,4 +129,8 @@ function createAnswerBox(container, ans, index) {
 
 function reveal(el) {
   el.classList.add('revealed');
+
+  // Reset the audio to the start before playing
+  clickSound.currentTime = 0;
+  clickSound.play();
 }
