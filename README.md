@@ -1,0 +1,1 @@
+There's a delay on the sound playing for correct answers.

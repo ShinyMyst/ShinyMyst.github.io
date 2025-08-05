@@ -8,14 +8,15 @@
 <body>
   <div class="screen active" id="title-screen">
     <button id="next-btn" class="nav-btn">Start Game</button>
+    <button id="music-toggle-btn" class="audio-toggle">Play Music</button>
   </div>
 
   <div class="screen" id="game-screen">
-    <!-- Previous button should be here, not in title screen -->
     <button id="prev-btn" class="nav-btn">← Previous</button>
   </div>
 
   <script src="questions.js"></script>
+  <audio id="intro-music" src="intro.mp3" preload="auto" loop></audio>
   <script src="script.js"></script>
 </body>
 </html>

@@ -7,8 +7,23 @@ const prevButton = document.getElementById('prev-btn');
 let screenIndex = 0;
 let questionIndex = -1;
 
-// Create the audio element once when the page loads
-const clickSound = new Audio('correct.mp3');
+// Define audio elements
+const introMusic = document.getElementById('intro-music');
+const correctSound = new Audio('correct.mp3');
+
+// Get the new audio toggle button
+const musicToggleButton = document.getElementById('music-toggle-btn');
+
+// Start music on first user interaction with the button
+musicToggleButton.addEventListener('click', () => {
+    if (introMusic.paused) {
+        introMusic.play();
+        musicToggleButton.textContent = 'Stop Music';
+    } else {
+        introMusic.pause();
+        musicToggleButton.textContent = 'Play Music';
+    }
+});
 
 // Initialize navigation
 nextButton.addEventListener('click', () => navigate('next'));
@@ -18,11 +33,13 @@ function navigate(direction) {
   if (direction === 'next') {
     if (screenIndex === 0) {
       // Start the game
+      introMusic.pause();
+      introMusic.currentTime = 0;
+
       titleScreen.classList.remove('active');
       gameScreen.classList.add('active');
       screenIndex = 1;
       questionIndex = 0;
-      // After starting, show the first question
       showQuestion(questionIndex);
     } else {
       // Go to next question
@@ -34,6 +51,9 @@ function navigate(direction) {
     questionIndex--;
     if (questionIndex < 0) {
       // Return to title screen
+      // Reset button text to 'Play Music' since it's paused
+      musicToggleButton.textContent = 'Play Music';
+
       questionIndex = -1;
       gameScreen.classList.remove('active');
       titleScreen.classList.add('active');
@@ -47,6 +67,9 @@ function navigate(direction) {
 
   // Handle end of game
   if (questionIndex >= questions.length) {
+    introMusic.pause();
+    introMusic.currentTime = 0;
+
     gameScreen.innerHTML = `<h1>Thanks for playing!</h1>`;
     nextButton.style.display = 'none';
     prevButton.style.display = 'none';
@@ -129,8 +152,6 @@ function createAnswerBox(container, ans, index) {
 
 function reveal(el) {
   el.classList.add('revealed');
-
-  // Reset the audio to the start before playing
-  clickSound.currentTime = 0;
-  clickSound.play();
+  correctSound.currentTime = 0;
+  correctSound.play();
 }
