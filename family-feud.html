@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Family Feud Game</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <div class="screen active" id="title-screen">
@@ -18,8 +18,12 @@
         <button id="prev-btn" class="nav-btn">← Previous</button>
     </div>
 
-    <audio id="intro-music" src="intro.mp3" preload="auto" loop></audio>
-    <script src="questions.js"></script>
-    <script src="script.js"></script>
+    <audio id="intro-music" src="assets/audio/intro.mp3" preload="auto" loop></audio>
+
+    <script src="js/questions.js"></script>
+    <script src="js/game-state.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
