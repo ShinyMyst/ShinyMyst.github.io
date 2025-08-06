@@ -247,3 +247,37 @@ h1 {
   background-size: cover;
   color: white;
 }
+
+#wrong-x-container {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10; /* ensure it's on top */
+}
+
+#wrong-btn {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+}
+
+#wrong-x-container {
+  position: fixed; /* cover viewport */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* vertical center */
+  gap: 10px;
+  z-index: 9999;
+  pointer-events: none; /* click-through if needed */
+}
+
+.wrong-x {
+  width: 20vw;   /* about 1/10th of viewport width */
+  max-width: 50vh; /* max about 1/4 viewport height */
+  height: auto;
+  transition: opacity 0.3s ease;
+}
