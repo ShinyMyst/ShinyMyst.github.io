@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Family Feud Game</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Family Feud Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="screen active" id="title-screen">
-    <button id="next-btn" class="nav-btn">Start Game</button>
-    <button id="music-toggle-btn" class="audio-toggle">Play Music</button>
-  </div>
+    <div class="screen active" id="title-screen">
+        <h1>Family Feud</h1>
+        <button id="next-btn" class="nav-btn">Start Game</button>
+        <button id="music-toggle-btn" class="audio-toggle">Play Music</button>
+    </div>
 
-  <div class="screen" id="game-screen">
-    <button id="prev-btn" class="nav-btn">← Previous</button>
-  </div>
+    <div class="screen" id="game-screen">
+        <div id="wrong-x-container"></div>
+        <button id="wrong-btn" class="nav-btn">✕ Wrong</button>
+        <button id="prev-btn" class="nav-btn">← Previous</button>
+    </div>
 
-  <div id="wrong-x-container">
-    <button id="wrong-btn" class="nav-btn">✕ Wrong</button>
-  </div>
-
-  <audio id="intro-music" src="intro.mp3" preload="auto" loop></audio>
-  <script src="questions.js"></script>
-  <script src="script.js"></script>
+    <audio id="intro-music" src="intro.mp3" preload="auto" loop></audio>
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

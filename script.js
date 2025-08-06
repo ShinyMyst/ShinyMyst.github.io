@@ -10,12 +10,13 @@ let questionIndex = -1;
 // Define audio elements
 const introMusic = document.getElementById('intro-music');
 const correctSound = new Audio('correct.mp3');
-
-// Get the new audio toggle button
-const musicToggleButton = document.getElementById('music-toggle-btn');
-
 const wrongSound = new Audio('wrong.mp3');
+
+// Get static button elements and wrong container
+const musicToggleButton = document.getElementById('music-toggle-btn');
+const wrongBtn = document.getElementById('wrong-btn');
 const wrongXContainer = document.getElementById('wrong-x-container');
+
 let wrongCount = 0;
 
 // Start music on first user interaction with the button
@@ -32,6 +33,7 @@ musicToggleButton.addEventListener('click', () => {
 // Initialize navigation
 nextButton.addEventListener('click', () => navigate('next'));
 prevButton.addEventListener('click', () => navigate('prev'));
+wrongBtn.addEventListener('click', triggerWrong);
 
 function navigate(direction) {
   if (direction === 'next') {
@@ -55,14 +57,12 @@ function navigate(direction) {
     questionIndex--;
     if (questionIndex < 0) {
       // Return to title screen
-      // Reset button text to 'Play Music' since it's paused
       musicToggleButton.textContent = 'Play Music';
 
       questionIndex = -1;
       gameScreen.classList.remove('active');
       titleScreen.classList.add('active');
       screenIndex = 0;
-      prevButton.style.display = 'none';
       nextButton.textContent = 'Start Game';
       return;
     }
@@ -84,12 +84,12 @@ function navigate(direction) {
   prevButton.style.display = (questionIndex <= 0 && screenIndex === 1) ? 'none' : 'block';
   nextButton.textContent = (screenIndex === 0) ? 'Start Game' : 'Next';
   nextButton.style.display = (questionIndex >= questions.length - 1 && screenIndex !== 0) ? 'none' : 'block';
-
-
 }
 
 function showQuestion(idx) {
   const q = questions[idx];
+
+  // Clear the game screen content
   gameScreen.innerHTML = '';
 
   const h1 = document.createElement('h1');
@@ -126,24 +126,9 @@ function showQuestion(idx) {
 
   gameScreen.appendChild(container);
 
-  // Add wrong button here
-  const wrongBtn = document.createElement('button');
-  wrongBtn.id = 'wrong-btn';
-  wrongBtn.className = 'nav-btn';
-  wrongBtn.textContent = '✕ Wrong';
-  wrongBtn.onclick = triggerWrong;
-
-
-  if (screenIndex === 1) {
-  const wrongBtn = document.createElement('button');
-  wrongBtn.id = 'wrong-btn';
-  wrongBtn.className = 'nav-btn';
-  wrongBtn.textContent = '✕ Wrong';
-  wrongBtn.onclick = triggerWrong;
+  // Append the static buttons after the content
+  gameScreen.appendChild(wrongXContainer);
   gameScreen.appendChild(wrongBtn);
-}
-  gameScreen.appendChild(wrongBtn);
-
   gameScreen.appendChild(nextButton);
   gameScreen.appendChild(prevButton);
 
