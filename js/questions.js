@@ -21,5 +21,16 @@ const gameQuestions = [
       { text: "Your AC/CC", points: 10 },
       { text: "Intervention Resource Guide", points: 10 }
     ]
+  },
+  {
+    question: "3. Name something you'd find in a kitchen pantry.",
+    answers: [
+      { text: "Canned Goods", points: 30 },
+      { text: "Pasta", points: 25 },
+      { text: "Cereal", points: 20 },
+      { text: "Spices", points: 15 },
+      { text: "Snacks", points: 10 },
+      { text: "Baking Supplies", points: 5 }
+    ]
   }
 ];

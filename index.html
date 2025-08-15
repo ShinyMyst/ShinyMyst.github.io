@@ -2,27 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Family Feud Game</title>
+    <title>Landing Page</title>
     <link rel="stylesheet" href="css/main.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .landing-container {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        .nav-btn {
+            text-decoration: none;
+            padding: 15px 40px;
+            font-size: 1.5em;
+            border-radius: 10px;
+            background: #00BFFF;
+            color: #111;
+            font-weight: bold;
+            box-shadow: 2px 2px 10px #000;
+            display: inline-block;
+            margin-top: 20px;
+            margin-left: 10px; /* Added spacing between buttons */
+            margin-right: 10px; /* Added spacing between buttons */
+        }
+        /* Optional: adjust button container for better alignment */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* --- FIX: Ensure buttons don't overlap due to main.css fixed positioning --- */
+        .landing-container .nav-btn {
+            position: static; /* Override 'position: fixed' from main.css */
+            /* Reset any fixed positioning coordinates that might be inherited */
+            left: auto;
+            right: auto;
+            top: auto;
+            bottom: auto;
+            /* Re-apply margin as 'position: static' makes them respect flexbox layout */
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="screen active" id="title-screen">
-        <button id="next-btn" class="nav-btn">Start Game</button>
-        <button id="music-toggle-btn" class="audio-toggle">Play Music</button>
+    <div class="landing-container">
+        <h1>Welcome!</h1>
+        <p>Click a button below to navigate:</p>
+        <div class="button-group">
+            <a href="family-feud.html" class="nav-btn">Start Game</a>
+            <a href="final.html" class="nav-btn">Go to Finals</a>
+        </div>
     </div>
-
-    <div class="screen" id="game-screen">
-        <div id="wrong-x-container"></div>
-        <button id="wrong-btn" class="nav-btn">✕ Wrong</button>
-        <button id="prev-btn" class="nav-btn">← Previous</button>
-    </div>
-
-    <audio id="intro-music" src="assets/audio/intro.mp3" preload="auto" loop></audio>
-
-    <script src="js/questions.js"></script>
-    <script src="js/game-state.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/audio.js"></script>
-    <script src="js/main.js"></script>
 </body>
 </html>

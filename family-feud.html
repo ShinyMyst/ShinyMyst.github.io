@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Family Feud Game</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="screen active" id="title-screen">
+        <button id="next-btn" class="nav-btn">Start Game</button>
+        <button id="music-toggle-btn" class="audio-toggle">Play Music</button>
+    </div>
+
+    <div class="screen" id="game-screen">
+        <div id="wrong-x-container"></div>
+        <button id="wrong-btn" class="nav-btn">✕ Wrong</button>
+        <button id="prev-btn" class="nav-btn">← Previous</button>
+    </div>
+
+    <audio id="intro-music" src="assets/audio/intro.mp3" preload="auto" loop></audio>
+
+    <script src="js/questions.js"></script>
+    <script src="js/game-state.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

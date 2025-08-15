@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            /* Updated background gradient for a more vibrant look */
+            background: linear-gradient(135deg, #1f2a40, #3a6073, #5587a8); /* Deeper blues and teal */
+            color: #e2e8f0; /* Light text, slightly off-white for better contrast */
+        }
+        .hidden {
+            display: none;
+        }
+        /* Custom styles for larger text boxes and responsiveness */
+        .text-box {
+            min-height: 80px; /* Make text boxes taller */
+            font-size: 1.125rem; /* Increase font size */
+        }
+        .question-text {
+            font-size: 1.5rem; /* Larger font for questions */
+            font-weight: bold;
+        }
+
+        /* Enhanced panel background and shadow */
+        .panel, .questions-panel {
+            background-color: rgba(30, 41, 59, 0.85); /* Slightly transparent dark blue-gray */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Stronger, softer shadow */
+            border: 1px solid rgba(74, 85, 104, 0.4); /* Subtle border */
+        }
+
+        /* Update input field styles for better integration */
+        .text-box {
+            background-color: rgba(45, 55, 72, 0.9); /* Darker, slightly transparent input background */
+            border: 1px solid rgba(74, 85, 104, 0.6);
+            color: #e2e8f0; /* Ensure text is readable */
+        }
+        .text-box::placeholder {
+            color: #a0aec0; /* Lighter placeholder text */
+        }
+        .text-box:focus {
+            outline: none;
+            border-color: #63b3ed; /* Brighter blue on focus */
+            box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.4); /* Focus ring */
+        }
+
+        /* Update button styles for a more polished look */
+        .toggle-button {
+            background: linear-gradient(90deg, #63b3ed, #4299e1); /* Blue gradient for buttons */
+            border: none;
+            transition: all 0.2s ease-in-out;
+        }
+        .toggle-button:hover {
+            background: linear-gradient(90deg, #4299e1, #63b3ed); /* Reverse gradient on hover */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+        .toggle-button:active {
+            transform: translateY(0);
+        }
+
+        /* Ensure responsive layout for smaller screens */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column; /* Stack panels vertically on small screens */
+            }
+            .panel, .questions-panel {
+                width: 100%; /* Full width for panels */
+                margin-bottom: 1rem; /* Add spacing between stacked panels */
+            }
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            .toggle-button {
+                margin-bottom: 0.5rem;
+                width: 80%; /* Make buttons wider on small screens */
+            }
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="flex flex-col items-center justify-center min-h-screen">
+        <h1 class="text-4xl font-extrabold mb-8 text-blue-400 text-center">Interactive Panel Layout</h1>
+
+        <div class="flex flex-col md:flex-row w-full max-w-7xl main-content justify-center items-start">
+
+            <!-- Left Panel -->
+            <div id="left-panel" class="panel w-full md:w-1/3 p-4 bg-gray-800 rounded-lg shadow-lg mb-4 md:mr-4">
+                <h2 class="text-2xl font-semibold mb-4 text-left text-blue-300">Left Panel</h2>
+                <div class="space-y-4">
+                    <input type="text" placeholder="Left Text Box 1" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" placeholder="Left Text Box 2" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" placeholder="Left Text Box 3" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" placeholder="Left Text Box 4" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" placeholder="Left Text Box 5" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <!-- Questions Panel (Middle) -->
+            <div id="questions-panel" class="questions-panel w-full md:w-1/3 p-4 bg-gray-800 rounded-lg shadow-lg mb-4 md:mx-4">
+                <h2 class="text-2xl font-semibold mb-4 text-center text-blue-300">Questions</h2>
+                <div id="questions-container" class="space-y-6">
+                    <p class="question-text">1. What is the capital of France?</p>
+                    <p class="question-text">2. What is 7 multiplied by 8?</p>
+                    <p class="question-text">3. Name a big cat.</p>
+                    <p class="question-text">4. Which planet is known as the Red Planet?</p>
+                    <p class="question-text">5. What is the chemical symbol for water?</p>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div id="right-panel" class="panel w-full md:w-1/3 p-4 bg-gray-800 rounded-lg shadow-lg mb-4 md:ml-4">
+                <h2 class="text-2xl font-semibold mb-4 text-right text-blue-300">Right Panel</h2>
+                <div class="space-y-4">
+                    <input type="text" placeholder="Right Text Box 1" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" placeholder="Right Text Box 2" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" placeholder="Right Text Box 3" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" placeholder="Right Text Box 4" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" placeholder="Right Text Box 5" class="text-box w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Buttons at the bottom -->
+        <div class="button-container mt-8 flex space-x-4">
+            <button id="toggleLeft" class="toggle-button px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition duration-300 ease-in-out">
+                Hide Left Panel
+            </button>
+            <button id="toggleRight" class="toggle-button px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition duration-300 ease-in-out">
+                Hide Right Panel
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const leftPanel = document.getElementById('left-panel');
+            const rightPanel = document.getElementById('right-panel');
+            const toggleLeftBtn = document.getElementById('toggleLeft');
+            const toggleRightBtn = document.getElementById('toggleRight');
+
+            // Function to toggle visibility and update button text
+            function togglePanel(panel, button) {
+                panel.classList.toggle('hidden');
+                if (panel.classList.contains('hidden')) {
+                    button.textContent = `Show ${panel.id.replace('-', ' ').replace('panel', 'Panel')}`;
+                } else {
+                    button.textContent = `Hide ${panel.id.replace('-', ' ').replace('panel', 'Panel')}`;
+                }
+            }
+
+            // Event listeners for the buttons
+            toggleLeftBtn.addEventListener('click', () => {
+                togglePanel(leftPanel, toggleLeftBtn);
+            });
+
+            toggleRightBtn.addEventListener('click', () => {
+                togglePanel(rightPanel, toggleRightBtn);
+            });
+        });
+    </script>
+</body>
+</html>
